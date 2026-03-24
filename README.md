@@ -27,10 +27,10 @@ The analysis focuses on:
 ## Dataset
 The analysis uses **4 CSV files from the Brazilian E-Commerce Public Dataset by Olist**:
 
-1. `customers.csv` – customer details  
-2. `orders.csv` – order details including status  
-3. `order_items.csv` – items in each order  
-4. `products.csv` – product details and categories  
+1. `olist_customers_dataset.csv` – customer details  
+2. `olist_orders_dataset.csv` – order details including status  
+3. `olist_order_items_dataset.csv` – items in each order  
+4. `olist_orders_dataset.csv` – product details and categories  
 
 ---
 
