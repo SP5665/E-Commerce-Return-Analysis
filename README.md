@@ -53,7 +53,7 @@ The analysis uses **4 CSV files from the Brazilian E-Commerce Public Dataset by 
 ## Key Findings
 
 - **Return Rate:** '0.49%' of orders were returned  
-- **Top Products:** Product IDs '5c3eaf54e8ee5d5378765ff16df7640b' and '8397dc503d1a0c2ac7422701884de5a6' had the highest number of returns  
+- **Top Products:** Product IDs 'X' and 'Y' had the highest number of returns  
 - **Category Risk:** Category 'pc_gamer' had the highest return rate (11.1%) 
 
 ---
