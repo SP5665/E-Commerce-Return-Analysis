@@ -32,19 +32,14 @@ h1, h2, h3, h4 {
 </style>
 """, unsafe_allow_html=True) #treats the string as raw HTML, allowing us to apply custom styles to the Streamlit app
 
-col1, col2 = st.columns([3,1])
 
-with col1:
-    st.title("📦 E-commerce Return Analysis")
-    st.markdown("### 📊 Insights Dashboard")
-    st.write("""
-       This project analyzes product return patterns in an e-commerce setting to identify key factors contributing to returns and improve business decision-making. The dataset used is the Olist E-commerce Dataset, a real-world dataset from a Brazilian online marketplace that includes information on customers, orders, products, and transactions.
+st.title("📦 E-commerce Return Analysis")
+st.markdown("### 📊 Insights Dashboard")
+st.write("""
+This project analyzes product return patterns in an e-commerce setting to identify key factors contributing to returns and improve business decision-making. The dataset used is the Olist E-commerce Dataset, a real-world dataset from a Brazilian online marketplace that includes information on customers, orders, products, and transactions.
 
-       The goal is to generate actionable insights that help reduce return rates, improve product quality and descriptions, and enhance customer satisfaction.
-       """)
-
-with col2:
-    st.image("https://cdn-icons-png.flaticon.com/512/891/891462.png", width=80)
+The goal is to generate actionable insights that help reduce return rates, improve product quality and descriptions, and enhance customer satisfaction.
+""")
 
 # Run this function once, save the result, and reuse it instead of running again
 @st.cache_data
