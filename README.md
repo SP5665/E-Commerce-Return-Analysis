@@ -58,6 +58,8 @@ The analysis uses **4 CSV files from the Brazilian E-Commerce Public Dataset by 
 - **Streamlit** - interactive dashboard and UI development
 - **Jupyter Notebook / VS Code** - development and experimentation
 
+---
+
 ## Credits
 Dataset: [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) <br>
 License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) <br>
