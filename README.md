@@ -50,20 +50,13 @@ The analysis uses **4 CSV files from the Brazilian E-Commerce Public Dataset by 
 
 ---
 
-## Key Findings
-
-- **Return Rate:** '0.49%' of orders were returned  
-- **Top Products:** Product IDs 'X' and 'Y' had the highest number of returns  
-- **Category Risk:** Category 'pc_gamer' had the highest return rate (11.1%) 
-
----
-
 ## Technologies Used
-- Python  
-- Pandas (data manipulation)  
-- NumPy (numerical operations)  
-- Matplotlib (visualization)  
-- Jupyter Notebook / VSCode (for running the notebook)
+- **Python** - core programming language
+- **Pandas** - data cleaning, manipulation, and analysis
+- **Matplotlib** - foundational plotting and visualization
+- **Seaborn** - enhanced statistical visualizations
+- **Streamlit** - interactive dashboard and UI development
+- **Jupyter Notebook / VS Code** - development and experimentation
 
 ## Credits
 Dataset: [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) <br>
