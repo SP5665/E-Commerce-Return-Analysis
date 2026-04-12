@@ -55,8 +55,18 @@ The analysis uses **4 CSV files from the Brazilian E-Commerce Public Dataset by 
 - **Pandas** - data cleaning, manipulation, and analysis
 - **Matplotlib** - foundational plotting and visualization
 - **Seaborn** - enhanced statistical visualizations
+- **Scikit-learn** - Machine learning model building (Logistic Regression)  
 - **Streamlit** - interactive dashboard and UI development
 - **Jupyter Notebook / VS Code** - development and experimentation
+
+---
+
+## Assumptions & Limitations
+
+- The dataset does not contain an explicit "return" field.
+- Order status "canceled" was used as a proxy to represent unsuccessful or incomplete orders.
+- Therefore, the model predicts the probability of order cancellation, which is used as an approximation for return risk.
+- The model is based on historical patterns and does not capture real-world causal factors such as customer intent or logistics delays.
 
 ---
 

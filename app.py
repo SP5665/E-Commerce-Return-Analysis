@@ -2,6 +2,22 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from model import train_model
+
+# st.cache_data.clear()
+# st.cache_resource.clear()
+
+# dark graphs
+sns.set_theme(style="darkgrid")
+plt.rcParams.update({
+    "axes.facecolor": "#0e1117",
+    "figure.facecolor": "#0e1117",
+    "axes.edgecolor": "#ffffff",
+    "axes.labelcolor": "#ffffff",
+    "xtick.color": "#ffffff",
+    "ytick.color": "#ffffff",
+    "text.color": "#ffffff"
+})
 
 # webpage css styling
 st.markdown("""
@@ -19,15 +35,6 @@ st.markdown("""
 
 h1, h2, h3, h4 {
     color: #ffffff;
-}
-
-.stButton>button {
-    background-color: #6C63FF;
-    color: white;
-    border-radius: 10px;
-    height: 3em;
-    width: 220px;
-    font-weight: bold;
 }
 </style>
 """, unsafe_allow_html=True) #treats the string as raw HTML, allowing us to apply custom styles to the Streamlit app
@@ -61,11 +68,15 @@ def load_data():
 df = load_data()
 returns = df[df['is_return']]
 
-# Button
-run = st.button("Run Analysis")
+#prediction model
+#caches the result of the function, so that if the function is called again with the same arguments, it will return the cached result instead of executing the function again.
+@st.cache_resource
+def get_model(df):
+    return train_model(df)
 
-if run:
-   with st.spinner("Analyzing data..."):
+model, columns = get_model(df)
+
+with st.spinner("Analyzing data..."):
 
        st.markdown("### Step 1 of 5")
        st.subheader("Order Summary")
@@ -123,9 +134,9 @@ if run:
 
        fig2, ax2 = plt.subplots(figsize=(10,5))
        sns.barplot(
-       x=top_products.values,
-       y=top_products.index,
-       ax=ax2
+              x=top_products.values,
+              y=top_products.index,
+              ax=ax2
        )
 
        ax2.set_title("Top 10 Returned Products (by ID)")
@@ -169,6 +180,53 @@ if run:
        st.pyplot(fig3)
 
        st.write(f"👉 {top_categories.index[0]} has the highest return rate of {top_categories.values[0]*100:.1f}%.")
+
+       st.divider()
+
+       # ---------------- PREDICTION ----------------
+       
+       # -------- LOOP (CALCULATE) --------
+       st.markdown("## 🤖 Prediction: Delivery Success Rate")
+
+       category_probs = {}
+
+       category_columns = [col for col in columns if col not in ['price', 'freight_value']]
+
+       for cat in category_columns:
+              temp = pd.DataFrame(0, index=[0], columns=columns)
+
+              # use REAL data for that category
+              cat_data = df[df['product_category_name'] == cat]
+
+              temp['price'] = cat_data['price'].mean()
+              temp['freight_value'] = cat_data['freight_value'].mean()
+
+              temp[cat] = 1
+
+              prob_return = model.predict_proba(temp)[0][1]
+              category_probs[cat] = (1 - prob_return) * 100
+
+       # dropdown UI
+       selected_category = st.selectbox(
+              "Select Product Category",
+              sorted(category_probs.keys())
+       )
+
+       # result
+       prob = category_probs[selected_category]
+
+       st.metric("Predicted Success Rate", f"{prob:.2f}%")
+
+       # optional insight
+       if prob > 90:
+              st.success("✅ Very high chance of successful delivery")
+       elif prob > 75:
+              st.info("👍 Good chance of delivery")
+       else:
+              st.warning("⚠️ Higher risk of return")
+
+       st.divider()
+
        st.markdown("---")
        st.markdown("## 💡 Key Business Insights")
 
