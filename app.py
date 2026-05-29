@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from model import train_model
+from train_model import train_model
+
 
 # st.cache_data.clear()
 # st.cache_resource.clear()
@@ -74,7 +75,7 @@ returns = df[df['is_return']]
 def get_model(df):
     return train_model(df)
 
-model, columns = get_model(df)
+model, columns, accuracy, cm, report = get_model(df)
 
 with st.spinner("Analyzing data..."):
 
@@ -188,6 +189,8 @@ with st.spinner("Analyzing data..."):
        # -------- LOOP (CALCULATE) --------
        st.markdown("## 🤖 Prediction: Delivery Success Rate")
 
+       st.metric("Model Accuracy", f"{accuracy:.2f}")
+       
        category_probs = {}
 
        category_columns = [col for col in columns if col not in ['price', 'freight_value']]
@@ -195,11 +198,9 @@ with st.spinner("Analyzing data..."):
        for cat in category_columns:
               temp = pd.DataFrame(0, index=[0], columns=columns)
 
-              # use REAL data for that category
-              cat_data = df[df['product_category_name'] == cat]
-
-              temp['price'] = cat_data['price'].mean()
-              temp['freight_value'] = cat_data['freight_value'].mean()
+              # use overall averages (no complexity)
+              temp['price'] = df['price'].mean()
+              temp['freight_value'] = df['freight_value'].mean()
 
               temp[cat] = 1
 
